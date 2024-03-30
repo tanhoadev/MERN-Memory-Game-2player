@@ -55,7 +55,7 @@ function Cardchild({ srcfront, backCard, yourTurn, setPairsUser1, setPairsUser2,
                     {yourTurn ?
                         <img className='img-card col-3' onClick={handleClick} src={backCard} style={{ width: '75px' }} alt="" />
                         :
-                        <img className='img-card col-3' onClick={() => message.error('not your turn yet')} src={backCard} style={{ width: '75px' }} alt="" />
+                        <img className='img-card col-3' onClick={() => {message.destroy(); message.error('not your turn yet')}} src={backCard} style={{ width: '75px' }} alt="" />
                     }
                 </div>
                 <div className="card-face-poke front-card-poke" style={{ display: 'inline-flex' }}>
