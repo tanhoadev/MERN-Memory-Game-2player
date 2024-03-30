@@ -1,0 +1,149 @@
+.idroom {
+    font-Size: 32px;
+    margin: 0, 6px;
+    color: #051118;
+}
+
+@media only screen and (max-width: 480px) {
+    .img-login {
+        display: none;
+    }
+    .value-cate-waiting {
+        font-size: 20px;
+    }
+    .coin-img-mobile {
+        width: 20px;
+        height: 20px;
+    }
+    .img-regis {
+        display: none;
+    }
+    .modal-chat {
+        z-index: 0;
+    }
+    .idroom {
+        font-size: 23px;
+    }
+    .dragon-right {
+        display: none;
+    }
+    .card-wait {
+        width: 150px !important;
+        height: 150px !important;
+    }
+    .img-card-waiting-room {
+        width: 80px;
+        border-radius: 8px;
+        height: 50px;
+    }
+    .user-name-waiting {
+        font-size: 21px !important;
+    }
+    .home-icon,
+    .ready-icon,
+    .not-ready-icon {
+        top: 115px;
+    }
+    .img-vs {
+        width: 80px;
+    }
+    .row-two-player {
+        position: absolute;
+        top: 89px;
+        right: 12px;
+    }
+    .button-go {
+        position: absolute;
+        bottom: 46px;
+    }
+    .icon-waiting-room {}
+}
+
+@media only screen and (max-width: 768px) {
+    .chat-waiting-room {
+        display: block;
+    }
+    .value-cate-waiting {
+        font-size: 23px;
+    }
+    .idroom {
+        font-size: 23px;
+    }
+    .dragon-right {
+        /* display: block */
+    }
+    .card-wait {
+        width: 150px;
+        height: 200px;
+    }
+    .img-card-waiting-room {
+        /* width: 80px;
+        border-radius: 8px;
+        height: 50px; */
+    }
+    .user-name-waiting {
+        font-size: 21px !important;
+    }
+    .home-icon {
+        top: 115px;
+    }
+    .row-two-player {
+        margin-top: 40px;
+    }
+    .img-vs {
+        width: 90px;
+    }
+    .row-two-player {
+        position: absolute;
+        top: 89px;
+        right: 12px;
+    }
+    .button-go {
+        position: absolute;
+        bottom: 46px;
+    }
+    .icon-waiting-room {}
+}
+
+@media only screen and (min-width: 769px) {
+    .idroom {
+        /* font-size: 23px; */
+    }
+    .dragon-right {
+        /* display: block */
+    }
+    .card-wait {
+        /* width: 150px;
+        height: 150px; */
+    }
+    .img-card-waiting-room {
+        /* width: 80px;
+        border-radius: 8px;
+        height: 50px; */
+    }
+    .user-name-waiting {
+        /* font-size: 21px !important; */
+    }
+    .home-icon {
+        /* top: 115px; */
+    }
+    .img-vs {
+        width: 120px;
+    }
+    .row-two-player {
+        position: absolute;
+        top: 220px;
+        right: 12px;
+    }
+    .button-go {
+        position: absolute;
+        bottom: 46px;
+    }
+    .icon-waiting-room {}
+}
+
+@media only screen and (min-width: 1072px) {
+    .group-room {
+        margin-top: -47px;
+    }
+}

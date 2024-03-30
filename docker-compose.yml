@@ -1,0 +1,36 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    container_name: mongo_c
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+  api:
+    build: ./server
+    container_name: api_c
+    working_dir: /app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    environment:
+      - MONGODB=mongodb+srv://buitanhoa0604:tanhoa0604@cluster0.xneczrh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+  client:
+    build: ./client
+    container_name: client_c
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - api
+    volumes:
+      - ./client:/client
+      - /client/node_modules
+volumes:
+  mongo-data:
