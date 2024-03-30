@@ -13,7 +13,7 @@ exports.signup = async (req, res, next) => {
     try {
         const emailUser = await User.findOne({ email: req.body.email })
 
-        if (user) {
+        if (emailUser) {
             return next(new createError('Email already exists!', 400))
         }
         const user = await User.findOne({ name: req.body.name })
