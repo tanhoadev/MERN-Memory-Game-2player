@@ -91,7 +91,7 @@ function Register() {
                                 },
                                 {
                                     validator: (_, value) => {
-                                        if (!/^[a-zA-Z0-9_-]+$/.test(value)) {
+                                        if (!/^[a-zA-Z0-9_@-]+$/.test(value)) {
                                             return Promise.reject("The data should only contain Latin characters, dashes, and digits.");
                                         }
                                         const specialWords = ["administrator", "support", "admin"];

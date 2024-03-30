@@ -3,33 +3,29 @@ const jwt = require('jsonwebtoken')
 
 const User = require('../models/userModel')
 const createError = require('../utils/appError')
-const Token = require('../models/token')
 const crypto = require('crypto')
 const nodemailer = require('nodemailer')
+const { off } = require('process')
 require('dotenv').config()
 
 //REGISTER USERS
 exports.signup = async (req, res, next) => {
     try {
-        const user = await User.findOne({ email: req.body.email })
+        const emailUser = await User.findOne({ email: req.body.email })
 
         if (user) {
+            return next(new createError('Email already exists!', 400))
+        }
+        const user = await User.findOne({ name: req.body.name })
+        if(user){
             return next(new createError('User already exists!', 400))
         }
-
         const hashedPassword = await bcrypt.hash(req.body.password, 12)
 
         const newUser = await User.create({
             ...req.body,
             password: hashedPassword
         })
-
-        const newTokenRegis = await Token.create({
-            userId: newUser._id,
-            token: crypto.randomBytes(16).toString('hex')
-        })
-        console.log(newTokenRegis)
-        //send mail
 
         // Assign jwt
         const token = jwt.sign({ _id: newUser._id }, process.env.SECRET_KEY, {
@@ -49,6 +45,7 @@ exports.signup = async (req, res, next) => {
         })
 
     } catch (error) {
+        console.log(error)
         next(error)
     }
 }

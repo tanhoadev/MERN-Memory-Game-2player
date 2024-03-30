@@ -24,6 +24,7 @@ function AddFrontCardAd({ setData }) {
                     message.success("add Success new user")
                     setData(data)
                     setLoad(false)
+                    setShow(false)
                 })
                 .catch(err => {
                     message.error(err.message)
