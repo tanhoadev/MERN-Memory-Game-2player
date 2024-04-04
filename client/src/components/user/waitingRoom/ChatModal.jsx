@@ -39,7 +39,7 @@ function ChatModal({ idRoomShow }) {
     }, [listChat]);
     const sendMessage = () => {
         setListChat([...listChat, { player: userData.name, message: messageChat }])
-        socket.emit('send_message_room', { playerName: userData.name, listChat: listChat, room: idRoomShow, message: messageChat, idSoc: socket.id })
+        socket.emit('send_message_room', { playerName: userData.name, listChat: listChat, room: parseInt(idRoomShow), message: messageChat, idSoc: socket.id })
         setMessageChat('')
         setShowButtonSend(false)
     }
@@ -55,7 +55,7 @@ function ChatModal({ idRoomShow }) {
         })
     }, [socket])
     useEffect(() => {
-        socket.emit('join_room1', { room: idRoomShow })
+        socket.emit('join_room1', { room: parseInt(idRoomShow) })
     }, [idRoomShow])
     return (
         <>

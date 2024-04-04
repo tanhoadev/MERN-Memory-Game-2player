@@ -15,16 +15,16 @@ function Cardchild({ srcfront, backCard, yourTurn, setPairsUser1, setPairsUser2,
             .then((data) => {
                 if (data.updateRoom) {
                     setStateCards(data.updateRoom.stateCard)
-                    socket.emit('click_Card', { room: idRoomShowStart, setPairsUser2: data.updateRoom.pairPlayers[1], setPairsUser1: data.updateRoom.pairPlayers[0], index: index, setStateCards: data.updateRoom.stateCard })
+                    socket.emit('click_Card', { room: parseInt(idRoomShowStart), setPairsUser2: data.updateRoom.pairPlayers[1], setPairsUser1: data.updateRoom.pairPlayers[0], index: index, setStateCards: data.updateRoom.stateCard })
                 }
                 if (data.newUpdateRoom) {
                     if (data.endGame) {
                         if (data.stateGame === "draw") {
-                            socket.emit("draw_Game", { room: idRoomShowStart })
+                            socket.emit("draw_Game", { room: parseInt(idRoomShowStart) })
                         }
                         else {
                             if (data.idUserWin && data.idUserLose) {
-                                socket.emit("Win_Or_Lose_Game", { idWin: data.idUserWin._id, idLose: data.idUserLose._id, room: idRoomShowStart })
+                                socket.emit("Win_Or_Lose_Game", { idWin: data.idUserWin._id, idLose: data.idUserLose._id, room: parseInt(idRoomShowStart) })
                             }
                         }
                     }
@@ -34,11 +34,11 @@ function Cardchild({ srcfront, backCard, yourTurn, setPairsUser1, setPairsUser2,
                     setStateCards(data.stateCardVirtual);
                     setTimeout(() => {
                         setStateCards(data.newUpdateRoom.stateCard)
-                        socket.emit('click_Card', { room: idRoomShowStart, index: index, setStateCards: data.newUpdateRoom.stateCard, setPairsUser2: data.newUpdateRoom.pairPlayers[1], setPairsUser1: data.newUpdateRoom.pairPlayers[0] })
+                        socket.emit('click_Card', { room: parseInt(idRoomShowStart), index: index, setStateCards: data.newUpdateRoom.stateCard, setPairsUser2: data.newUpdateRoom.pairPlayers[1], setPairsUser1: data.newUpdateRoom.pairPlayers[0] })
                     }, 800)
                     // setStateCards([])
-                    socket.emit('click_Card', { room: idRoomShowStart, index: index, setPairsUser2: data.newUpdateRoom.pairPlayers[1], setPairsUser1: data.newUpdateRoom.pairPlayers[0], setStateCards: data.stateCardVirtual })
-                    socket.emit('change_turn', { room: idRoomShowStart, turn: data.newUpdateRoom.turn[0]._id })
+                    socket.emit('click_Card', { room: parseInt(idRoomShowStart), index: index, setPairsUser2: data.newUpdateRoom.pairPlayers[1], setPairsUser1: data.newUpdateRoom.pairPlayers[0], setStateCards: data.stateCardVirtual })
+                    socket.emit('change_turn', { room: parseInt(idRoomShowStart), turn: data.newUpdateRoom.turn[0]._id })
                 }
                 // setStateCards()
             })
@@ -55,7 +55,7 @@ function Cardchild({ srcfront, backCard, yourTurn, setPairsUser1, setPairsUser2,
                     {yourTurn ?
                         <img className='img-card col-3' onClick={handleClick} src={backCard} style={{ width: '75px' }} alt="" />
                         :
-                        <img className='img-card col-3' onClick={() => {message.destroy(); message.error('not your turn yet')}} src={backCard} style={{ width: '75px' }} alt="" />
+                        <img className='img-card col-3' onClick={() => { message.destroy(); message.error('not your turn yet') }} src={backCard} style={{ width: '75px' }} alt="" />
                     }
                 </div>
                 <div className="card-face-poke front-card-poke" style={{ display: 'inline-flex' }}>

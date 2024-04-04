@@ -28,10 +28,10 @@ function TimeOutGame({ draw, youWin, idRoomShowStart, idTurn, setEndGametWin, se
             TimeOutGameAPI({ id, token })
                 .then(data => {
                     if (data.stateGame === 'draw') {
-                        socket.emit("result_game_draw", { room: idRoomShowStart, draw: true })
+                        socket.emit("result_game_draw", { room: parseInt(idRoomShowStart), draw: true })
                     }
                     else {
-                        socket.emit("result_game", { room: idRoomShowStart, playerWin: data.playerWin, playerLose: data.playerLose })
+                        socket.emit("result_game", { room: parseInt(idRoomShowStart), playerWin: data.playerWin, playerLose: data.playerLose })
                     }
                 })
                 .catch(error => {

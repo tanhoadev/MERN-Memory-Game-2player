@@ -66,7 +66,7 @@ function HomeG() {
                 setStateCards(data.stateCard)
                 setIdRoomShowStart(data.iDRoom)
                 setTimeEndGame(data.timeEndGame)
-                socket.emit('join_room1', { room: data.iDRoom })
+                socket.emit('join_room1', { room: parseInt(data.iDRoom) })
             })
             .catch(err => console.log(err))
         socket.on('card_change', (data) => {

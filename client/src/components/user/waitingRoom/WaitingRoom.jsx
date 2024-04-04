@@ -35,7 +35,7 @@ function WaitingRoom() {
                         setCoins(data.owner.coins)
                         if (data.participants[0].coins < data.category.price) {
                             try {
-                                await DeleteRoom({ idRoom: data._id, idOwner: data.owner._id, token })
+                                await DeleteRoom({ idRoom: parseInt(data._id), idOwner: data.owner._id, token })
                                     .then(res => {
                                         socket.emit('delete_room', { room: parseInt(data.iDRoom) })
                                         setJoinRoom(false)
@@ -57,7 +57,7 @@ function WaitingRoom() {
                             setCoins(data.participants[1].coins)
                         }
                         if (data.participants[1].coins < data.category.price && data.participants[1]._id === userData._id) {
-                            RemovePlayer({ idRoom: data._id, idUser: data.owner._id, idGuestUser: data.participants[1]._id, token })
+                            RemovePlayer({ idRoom: parseInt(data._id), idUser: data.owner._id, idGuestUser: data.participants[1]._id, token })
                                 .then((res) => {
                                     socket.emit("leave_room", { room: parseInt(data.iDRoom), user: userData.name })
                                     setJoinRoom(false)
@@ -101,7 +101,7 @@ function WaitingRoom() {
                     setIdOwner('')
                     setIsOwner(false)
                     setReady(false)
-                    socket.emit('delete_room', { room: idRoomShow })
+                    socket.emit('delete_room', { room: parseInt(idRoomShow) })
                 })
                 .catch(error => {
                     console.log(error)
@@ -110,7 +110,7 @@ function WaitingRoom() {
         else {
             await RemovePlayer({ idRoom, idUser: idOwner, idGuestUser: userData._id, token })
                 .then((res) => {
-                    socket.emit("leave_room", { room: idRoomShow, user: userData.name })
+                    socket.emit("leave_room", { room: parseInt(idRoomShow), user: userData.name })
                     setJoinRoom(false)
                     setIDRoom('')
                     setIdOwner('')
@@ -126,7 +126,7 @@ function WaitingRoom() {
         setKickModal(false)
         RemovePlayer({ idRoom, idUser: userData._id, idGuestUser: idUser2, token })
             .then(res => {
-                socket.emit('kick_player', { room: idRoomShow, player: idUser2 })
+                socket.emit('kick_player', { room: parseInt(idRoomShow), player: idUser2 })
                 setUser2('')
                 setIdUser2('')
             })
@@ -182,7 +182,7 @@ function WaitingRoom() {
     }, [socket])
     useEffect(() => {
         if (idRoomShow !== '') {
-            socket.emit('join_room1', { room: idRoomShow })
+            socket.emit('join_room1', { room: parseInt(idRoomShow) })
         }
     }, [idRoomShow])
 

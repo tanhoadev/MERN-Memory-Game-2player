@@ -16,13 +16,13 @@ const { Server } = require('socket.io')
 app.use(cors())
 
 const server = http.createServer(app)
-
 const io = new Server(server, {
     cors: {
-        origin: process.env.URL_CLIENT,
+        origin: "*",
         methods: ["GET", "POST", "PUT"]
     }
 })
+console.log(process.env.URL_CLIENT)
 //Socket.io
 
 // 1) Middleware
@@ -57,7 +57,7 @@ app.use((err, req, res, next) => {
 //5) Server
 const PORT = process.env.PORT_SERVER
 server.listen(PORT, () => {
-    console.log("App running on", PORT)
+    console.log("App running on");
 })
 
 io.on('connection', (socket) => {

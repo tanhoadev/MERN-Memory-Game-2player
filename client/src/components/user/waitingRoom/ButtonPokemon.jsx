@@ -13,7 +13,7 @@ function ButtonPokemon({ title, idOwner, idRoom, startGame, setStartGame, idRoom
     const handleStartGame = () => {
         StartGameFun({ idRoom, idUser: idOwner, token })
             .then(res => {
-                socket.emit("StartGame", { room: idRoomShow })
+                socket.emit("StartGame", { room: parseInt(idRoomShow) })
                 setStartGame(true)
             })
             .catch(err => {
