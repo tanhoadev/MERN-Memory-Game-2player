@@ -18,11 +18,10 @@ app.use(cors())
 const server = http.createServer(app)
 const io = new Server(server, {
     cors: {
-        origin: "*",
+        origin: process.env.URL_CLIENT,
         methods: ["GET", "POST", "PUT"]
     }
 })
-console.log(process.env.URL_CLIENT)
 //Socket.io
 
 // 1) Middleware
@@ -96,7 +95,8 @@ io.on('connection', (socket) => {
     })
 
     socket.on("click_Card", (data) => {
-        socket.broadcast.to(data.room).emit('card_change', data)
+        console.log(data.room)
+        socket.to(data.room).emit('card_change', data)
     })
 
     socket.on("change_turn", (data) => {

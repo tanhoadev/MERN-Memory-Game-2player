@@ -13,7 +13,7 @@ import InforUserTurn from './InforUserTurn'
 import InfoUser from './InfoUser'
 import { GetUserCoins } from '../../../api/user'
 
-const socket = io.connect("http://localhost:5000")
+const socket = io.connect(process.env.REACT_APP_BASE_URL)
 
 function HomeG() {
     const { userData, setStartGame, token, setCoins } = useAuth()
@@ -69,6 +69,9 @@ function HomeG() {
                 socket.emit('join_room1', { room: parseInt(data.iDRoom) })
             })
             .catch(err => console.log(err))
+        
+    }, [])
+    useEffect(() =>{
         socket.on('card_change', (data) => {
             setStateCards(data.setStateCards)
             // if (data.setPairsUser1  data.setPairsUser2) {
@@ -122,7 +125,7 @@ function HomeG() {
         // return () => {
         //     clearInterval(intervalId);
         // };
-    }, [socket])
+    },[socket])
     useEffect(() => {
             if(!end){
                 const intervalId = setInterval(() => {
