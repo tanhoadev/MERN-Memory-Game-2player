@@ -7,6 +7,8 @@ services:
       - mongo-data:/data/db
     ports:
       - "27017:27017"
+    networks:
+      - mern-app
   api:
     build: ./server
     container_name: api_c
@@ -20,6 +22,8 @@ services:
       - /app/node_modules
     environment:
       - MONGODB=mongodb+srv://buitanhoa0604:tanhoa0604@cluster0.xneczrh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+    networks:
+      - mern-app
   client:
     build: ./client
     container_name: client_c
@@ -32,5 +36,10 @@ services:
     volumes:
       - ./client:/client
       - /client/node_modules
+    networks:
+      - mern-app
+networks:
+  mern-app:
+    driver: bridge
 volumes:
   mongo-data:
